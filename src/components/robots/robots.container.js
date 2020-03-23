@@ -1,29 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import WithSpinner from '../hoc/spinner/withSpinner.component';
 import Robots from './robots.component';
+import useFetch from '../../effects/use-fetch.effect';
 
 const RobotsWithSpinner = WithSpinner(Robots);
 
-class RobotsContainer extends Component {
-	state = {
-		robots: [],
-		isLoading: true
-	};
+const RobotsContainer = () => {
+	const url = 'https://www.hatchways.io/api/assessment/students';
+	const [data, isLoading, isError] = useFetch(url);
 
-	async componentDidMount() {
-		const url = 'https://www.hatchways.io/api/assessment/students';
-		const res = await fetch(url);
-		const data = await res.json();
-		const robots = data.students;
-		this.setState({
-			robots: robots,
-			isLoading: false
-		});
-	}
-
-	render() {
-		return <RobotsWithSpinner {...this.state}></RobotsWithSpinner>;
-	}
-}
+	return (
+		<RobotsWithSpinner
+			robots={data}
+			isLoading={isLoading}
+			isError={isError}
+		></RobotsWithSpinner>
+	);
+};
 
 export default RobotsContainer;

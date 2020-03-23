@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import RobotContainer from '../robot-info/main-info/robot.container';
 import SearchField from '../search-field/search-field.component';
 
-class Robots extends Component {
-	state = {
+const Robots = ({ robots }) => {
+	const [input, setInput] = useState({
 		inputRobots: '',
 		inputTags: ''
-	};
+	});
 
-	findRobotByIdAndUpdateTags = (id, tags) => {
-		const { robots } = this.props;
+	const { inputRobots, inputTags } = input;
+
+	const findRobotByIdAndUpdateTags = (id, tags) => {
 		robots.find(robot => robot.id === id).tags = tags;
 	};
 
-	isTagIncluded = (tags, input) => {
+	const isTagIncluded = (tags, input) => {
 		if (input) {
 			if (!tags) return false;
 			const newTags = tags.filter(elem =>
@@ -25,52 +26,46 @@ class Robots extends Component {
 		}
 	};
 
-	handleOnChange = input => {
+	const handleOnChange = inputValue => {
 		const inputState =
-			input.id.slice(0, 4) === 'name' ? 'inputRobots' : 'inputTags';
+			inputValue.id.slice(0, 4) === 'name' ? 'inputRobots' : 'inputTags';
 
-		this.setState({
-			[inputState]: input.value
-		});
+		setInput({ ...input, [inputState]: inputValue.value });
 	};
 
-	render() {
-		const { inputRobots, inputTags } = this.state;
-		const { robots } = this.props;
-		const filteredRobots = robots.filter(
-			robot =>
-				(robot.firstName.toUpperCase().includes(inputRobots.toUpperCase()) ||
-					robot.lastName.toUpperCase().includes(inputRobots.toUpperCase())) &&
-				this.isTagIncluded(robot.tags, inputTags)
-		);
+	const filteredRobots = robots.filter(
+		robot =>
+			(robot.firstName.toUpperCase().includes(inputRobots.toUpperCase()) ||
+				robot.lastName.toUpperCase().includes(inputRobots.toUpperCase())) &&
+			isTagIncluded(robot.tags, inputTags)
+	);
 
-		return (
-			<div className="container z-depth-3">
-				<SearchField
-					id="name-input"
-					type="text"
-					placeholder="Search by name"
-					input={inputRobots}
-					onInputChange={this.handleOnChange}
-				/>
-				<SearchField
-					id="tag-input"
-					type="text"
-					placeholder="Search by tags"
-					input={inputTags}
-					onInputChange={this.handleOnChange}
-				/>
-				{filteredRobots.map(({ id, ...otherProps }) => (
-					<RobotContainer
-						key={id}
-						id={id}
-						{...otherProps}
-						findRobotByIdAndUpdateTags={this.findRobotByIdAndUpdateTags}
-					></RobotContainer>
-				))}
-			</div>
-		);
-	}
-}
+	return (
+		<div className="container z-depth-3">
+			<SearchField
+				id="name-input"
+				type="text"
+				placeholder="Search by name"
+				input={inputRobots}
+				onInputChange={handleOnChange}
+			/>
+			<SearchField
+				id="tag-input"
+				type="text"
+				placeholder="Search by tags"
+				input={inputTags}
+				onInputChange={handleOnChange}
+			/>
+			{filteredRobots.map(({ id, ...otherProps }) => (
+				<RobotContainer
+					key={id}
+					id={id}
+					{...otherProps}
+					findRobotByIdAndUpdateTags={findRobotByIdAndUpdateTags}
+				></RobotContainer>
+			))}
+		</div>
+	);
+};
 
 export default Robots;

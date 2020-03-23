@@ -7,16 +7,16 @@ const RobotExpanded = ({
 	handleOnChange,
 	handleOnKeyPress,
 	tagNames,
-	input
+	input,
+	findTagByNameAndRemoveTag
 }) => {
 	return (
 		<div>
-			<Grades
-				grades={grades}
-				handleOnChange={handleOnChange}
-				handleOnKeyPress={handleOnKeyPress}
-			></Grades>
-			<Tag tagNames={tagNames}></Tag>
+			<Grades grades={grades}></Grades>
+			<Tag
+				tagNames={tagNames}
+				findTagByNameAndRemoveTag={findTagByNameAndRemoveTag}
+			></Tag>
 			<AddButton
 				id="tags"
 				type="text"
