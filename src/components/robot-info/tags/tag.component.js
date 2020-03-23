@@ -7,7 +7,7 @@ const Tag = ({ tagNames, findTagByNameAndRemoveTag }) => {
 						<div key={Math.random()} className="chip">
 							{tag}
 							<i
-								class="close material-icons"
+								className="close material-icons"
 								onClick={() => findTagByNameAndRemoveTag(tag)}
 							>
 								close
