@@ -12,7 +12,6 @@ const Grades = ({ grades }) => {
 								{`Test ${++counter}:`} &nbsp; &nbsp; {`${grade}%`}
 							</span>{' '}
 							<br />
-							<h1> Hello</h1>
 						</GradeContainer>
 				  ))
 				: null}
