@@ -1,20 +1,22 @@
 import React from 'react';
+import { GradesContainer, GradeContainer } from './grades.styles';
 
 const Grades = ({ grades }) => {
 	let counter = 0;
 	return (
-		<div>
+		<GradesContainer>
 			{grades
 				? grades.map(grade => (
-						<div key={counter} className="grades">
+						<GradeContainer key={counter}>
 							<span>
 								{`Test ${++counter}:`} &nbsp; &nbsp; {`${grade}%`}
 							</span>{' '}
 							<br />
-						</div>
+							<h1> Hello</h1>
+						</GradeContainer>
 				  ))
 				: null}
-		</div>
+		</GradesContainer>
 	);
 };
 

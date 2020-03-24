@@ -10,16 +10,14 @@ const AddButton = ({
 }) => {
 	return (
 		<div className="tag-input">
-			<div className="col s-4 tag-input">
-				<input
-					id={id}
-					type={type}
-					placeholder={placeholder}
-					value={input}
-					onChange={e => handleOnChange(e.target.value)}
-					onKeyPress={e => handleOnKeyPress(e.key)}
-				/>
-			</div>
+			<input
+				id={id}
+				type={type}
+				placeholder={placeholder}
+				value={input}
+				onChange={e => handleOnChange(e.target.value)}
+				onKeyPress={e => handleOnKeyPress(e.key)}
+			/>
 		</div>
 	);
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 const Robot = ({ firstName, lastName, email, company, skill, average }) => {
 	return (
-		<div>
+		<div data-testid="robot-main-info">
 			<h3>{`${firstName.toUpperCase()} ${lastName.toUpperCase()}`}</h3>
 			<p>Email: {email}</p>
 			<p>Company: {company}</p>

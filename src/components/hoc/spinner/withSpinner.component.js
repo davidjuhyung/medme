@@ -8,12 +8,12 @@ const WithSpinner = WrappedComponent => ({
 	...otherProps
 }) => {
 	if (isError) {
-		return <div>Something Went Wrong!</div>;
+		return <div data-testid="error">Something Went Wrong!</div>;
 	}
 
 	if (isLoading) {
 		return (
-			<SpinnerOverlay>
+			<SpinnerOverlay data-testid="loading">
 				<SpinnerContainer />
 			</SpinnerOverlay>
 		);

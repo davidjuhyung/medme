@@ -41,7 +41,7 @@ const Robots = ({ robots }) => {
 	);
 
 	return (
-		<div className="container z-depth-3">
+		<div data-testid="robots-container" className="container z-depth-3">
 			<SearchField
 				id="name-input"
 				type="text"
@@ -58,6 +58,7 @@ const Robots = ({ robots }) => {
 			/>
 			{filteredRobots.map(({ id, ...otherProps }) => (
 				<RobotContainer
+					data-testid="robot"
 					key={id}
 					id={id}
 					{...otherProps}
